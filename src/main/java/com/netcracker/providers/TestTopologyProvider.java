@@ -200,6 +200,8 @@ public class TestTopologyProvider extends AbstractProvider implements LinkProvid
 
     @Override
     public void executeBatch(FlowRuleBatchOperation batch) {
+        CompletedBatchOperation status = new CompletedBatchOperation(true, new HashSet<>(), batch.deviceId());
 
+        flowRuleProviderService.batchOperationCompleted(batch.id(), status);
     }
 }
