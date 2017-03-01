@@ -1,0 +1,24 @@
+{    
+    "devices" : {
+        "testprovider:a1" : {
+        },
+        "testprovider:a2" : {
+        },
+        "testprovider:b2" : {
+        }
+    },
+    "links" : {
+        "testprovider:a1/1-testprovider:a2/1" : {
+          "params" : {
+            "name" : "a1-a2 Link",
+            "directionality" : "bidirectional"
+          }
+        },
+        "testprovider:a2/2-testprovider:b2/1" : {
+          "params" : {
+            "name" : "a2-b2 Link",
+            "directionality" : "bidirectional"
+          }
+        }
+    }
+}
