@@ -62,6 +62,11 @@ public class TestTopologyProviderTest {
     public void setUpLink() {
         testTopologyProvider.setDevices(jsonConfig.get("devices"));
         testTopologyProvider.setPorts();
+		ConnectPoint src = ConnectPoint.deviceConnectPoint("testprovider:a1/1");
+        ConnectPoint dst = ConnectPoint.deviceConnectPoint("testprovider:a2/1");
+        testTopologyProvider.upLink(src, dst);
+        assertTrue(testTopologyProvider.links.containsKey(src));
+        assertTrue(testTopologyProvider.links.containsKey(dst));
     }
 
     @Test
