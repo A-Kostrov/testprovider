@@ -1,6 +1,9 @@
 package com.netcracker.providers;
 
 import static org.easymock.EasyMock.createMock;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -8,15 +11,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.onosproject.net.ConnectPoint;
 import org.onosproject.net.DeviceId;
-import org.onosproject.net.Link;
 import org.onosproject.net.device.DeviceProviderService;
-import org.onosproject.net.link.DefaultLinkDescription;
-import org.onosproject.net.link.LinkDescription;
 import org.onosproject.net.link.LinkProviderService;
 
 import java.io.File;
-
-import static org.junit.Assert.*;
 
 public class TestTopologyProviderTest {
     private static final String TEST_CFG_FILE = "testconfig.json";
@@ -28,7 +26,10 @@ public class TestTopologyProviderTest {
     public void setUp() throws Exception {
         testTopologyProvider.deviceProviderService = createMock(DeviceProviderService.class);
         testTopologyProvider.linkProviderService = createMock(LinkProviderService.class);
-        file = new File(TEST_CFG_FILE);
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        file = new File(classLoader.getResource(TEST_CFG_FILE).getFile());
+
         jsonConfig = (ObjectNode) new ObjectMapper().readTree(file);
     }
 

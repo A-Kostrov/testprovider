@@ -115,7 +115,7 @@ public class TestTopologyProvider extends AbstractProvider implements LinkProvid
     public void changePortState(DeviceId deviceId, PortNumber portNumber, boolean enable) {
         deviceProviderService.portStatusChanged(deviceId, new DefaultPortDescription(portNumber, enable));
 
-        ConnectPoint connectPoint = ConnectPoint.deviceConnectPoint(deviceId + "/" + portNumber);
+        ConnectPoint connectPoint = new ConnectPoint(deviceId, portNumber);
 
         if(enable && downLinks.containsKey(connectPoint)
                   && !downLinks.containsKey(downLinks.get(connectPoint))) {
@@ -145,7 +145,7 @@ public class TestTopologyProvider extends AbstractProvider implements LinkProvid
 
     protected void setPorts(){
         List<PortDescription> ports = new LinkedList<>();
-        for(int i = 1; i < NUMBER_OF_PORTS; i++)
+        for(int i = 1; i <= NUMBER_OF_PORTS; i++)
             ports.add(new DefaultPortDescription(PortNumber.portNumber(i), true));
 
         for(DeviceId id : devDesc.keySet()) {
